@@ -26,7 +26,7 @@ var background = function (window) {
         var background;
         
         // ANIMATION VARIABLES HERE:
-        
+        var = tree 
      
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
@@ -41,11 +41,17 @@ var background = function (window) {
             
             // TODO: 3 - Add a moon and starfield
             var moon = draw.bitmap("img/moon.png");
-            moon.x = 300;
+            moon.x = 
+            300;
             moon.y = 200;
             moon.scaleX = 10.0;
             moon.scaleY = 10.0;
             background.addChild(moon);
+
+            var circle = draw.circle(10, "white", "LightGray", 2);
+            circle.x = canvasWidth * Math.random();
+            circle.y = groundY * Math.random();
+            background.addChild(circle);
             
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             
