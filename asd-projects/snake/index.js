@@ -50,7 +50,7 @@ function init() {
   snake.head = snake.body[0];
   
   // TODO 8: initialize the first apple
-
+makeApple();
 
   // start update interval
   updateInterval = setInterval(update, 100);
@@ -74,7 +74,7 @@ function update() {
   
   if (hasCollidedWithApple()) {
     handleAppleCollision();
-  }
+  } 
   
 }
 
@@ -88,6 +88,20 @@ function moveSnake() {
   column/row properties. 
   
   */
+  for (i = snake.body.length - 1; i >= 1; i--){
+    var snakeSquare = snake.body[i];
+    
+    var nextSnakeSquare = snake.body[i-1];
+    var nextRow = nextSnakeSquare.row;
+    var nextColumn = nextSnakeSquare.column;
+    var nextDirection = nextSnakeSquare.direction;
+    
+    snakeSquare.direction = nextDirection;
+    snakeSquare.row = nextRow;
+    snakeSquare.column = nextColumn;
+    repositionSquare(snakeSquare);
+}
+
   
    
   //Before moving the head, check for a new direction from the keyboard input
@@ -104,19 +118,16 @@ function moveSnake() {
   if (snake.head.direction === 'left') {
     snake.head.column = snake.head.column - 1;
   }
-  repositionSquare(snake.head);
 
-  if (snake.head.direction === 'right') {
+  else if (snake.head.direction === 'right') {
     snake.head.column = snake.head.column + 1;
   }
-  repositionSquare(snake.head);
 
-  if (snake.head.direction === 'up') {
+  else if (snake.head.direction === 'up') {
     snake.head.row = snake.head.row - 1;
   }
-  repositionSquare(snake.head);
 
-  if (snake.head.direction === 'down') {
+  else if (snake.head.direction === 'down') {
     snake.head.row = snake.head.row + 1;
   }
   repositionSquare(snake.head);
@@ -154,6 +165,10 @@ function hasCollidedWithApple() {
   
   HINT: Both the apple and the snake's head are aware of their own row and column
   */
+
+  if(snake.head.row === apple.row & snake.head.column === apple.column){
+    return true;
+  }
   
   return false;
 }
@@ -178,7 +193,19 @@ function handleAppleCollision() {
   */ 
   var row = snake.tail.row + 0;
   var column = snake.tail.column + 0;
-  
+  if(snake.tail.direction === "up"){
+    row = snake.tail.row + 1
+  }
+  if(snake.tail.direction === "down"){
+    row = snake.tail.row - 1
+  }
+  if(snake.tail.direction === "left"){
+    column = snake.tail.column + 1
+  }
+  if(snake.tail.direction === "right"){
+    column = snake.tail.column - 1
+  }
+
   // code to determine the row and column of the snakeSquare to add to the snake
   
   makeSnakeSquare(row, column);
