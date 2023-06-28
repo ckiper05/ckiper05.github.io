@@ -221,7 +221,11 @@ function hasCollidedWithSnake() {
   
   */
   
-  return false;
+  for  (var i = 1; i < snake.body.length; i++) {
+    if (snake.head.row ===  snake.body[i].row && snake.head.column === snake.body[i].column) {
+      return true;
+    }
+  }
 }
 
 function hasHitWall() {
